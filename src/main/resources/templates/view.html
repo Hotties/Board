@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${board.title}">게시글</title>
+</head>
+<body>
+<h1>게시글</h1>
+<p>제목: <span th:text="${board.title}"></span></p>
+<p>내용: <span th:text="${board.content}"></span></p>
+<a href="/">목록으로</a>
+<a th:href="@{/delete(id=${board.id})}">삭제</a>
+</body>
+</html>
