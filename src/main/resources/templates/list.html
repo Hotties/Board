@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>게시판 목록</title>
+    <style>
+        .header-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
+
 <body>
-<h1>게시판 목록</h1>
-<a href="/write">글쓰기</a>
+    <div class="header-buttons">
+        <a href="/"><h1>게시판 목록</h1></a>
+        <div sec:authorize = "isAuthenticated()">
+            <a href="/write">글쓰기</a>
+            <form th:action="@{/logout}" method="post" style="display: inline">
+                <button type = "submit"> 로그아웃 </button>
+            </form>
+        </div>
+
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">로그인</a>
+            <a th:href="@{/signup}">회원가입</a>
+        </div>
+
+    </div>
+
 <hr>
 <table border="1">
     <thead>

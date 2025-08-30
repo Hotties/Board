@@ -1,6 +1,7 @@
 package org.example.board;
 
 
+import org.springframework.security.core.parameters.P;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,9 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String list(Model model) {
@@ -45,5 +49,23 @@ public class BoardController {
         boardService.delete(id);
         return "redirect:/";
     }
+    
+    //로그인 페이지
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
+    //회원가입
+
+    @GetMapping("/signup")
+    public String signupForm() {
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String signup(String username, String password, String email) {
+        userService.createUser(username, password, email);
+        return "redirect:/login";
+    }
 }
